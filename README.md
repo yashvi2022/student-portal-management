@@ -46,41 +46,7 @@ student-management-portal/
 - Docker Desktop installed
 - Docker Compose installed
 
-### Installation
-
-1. **Create the project directory structure:**
-
-```bash
-mkdir -p student-management-portal/backend
-mkdir -p student-management-portal/frontend/src
-cd student-management-portal
-```
-
-2. **Create Backend files:**
-
-Place these files in the `backend/` directory:
-- `app.py` (Flask application)
-- `requirements.txt` (Python dependencies)
-- `Dockerfile` (Backend Docker configuration)
-
-3. **Create Frontend files:**
-
-Place these files in the `frontend/` directory:
-- `package.json`
-- `vite.config.js`
-- `index.html`
-- `Dockerfile` (Frontend Docker configuration)
-
-Place these files in `frontend/src/`:
-- `App.jsx`
-- `App.css`
-- `main.jsx`
-
-4. **Create Docker Compose file:**
-
-Place `docker-compose.yml` in the root directory.
-
-5. **Build and run the application:**
+**Build and run the application:**
 
 ```bash
 docker-compose up --build
@@ -91,7 +57,7 @@ This will:
 - Pull the MongoDB image
 - Start all three services
 
-6. **Access the application:**
+**Access the application:**
 
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:5000/api
