@@ -63,7 +63,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ secrets.ACR_NAME }}/frontend:${{ steps.vars.outputs.IMAGE_TAG }}
+          tags: ${{ secrets.ACR_NAME }}.azurecr.io/frontend:${{ steps.vars.outputs.IMAGE_TAG }}
 
       - name: Publish image tag output
         run: echo "image=${{ secrets.ACR_NAME }}/frontend:${{ steps.vars.outputs.IMAGE_TAG }}" >> $GITHUB_OUTPUT
