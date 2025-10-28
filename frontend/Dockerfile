@@ -20,7 +20,7 @@ FROM nginx:alpine
 
 # Copy built assets from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
-#
+
 # Create a simple nginx config
 RUN echo 'server { \
     listen 80; \
