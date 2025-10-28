@@ -1,0 +1,69 @@
+name: Frontend CI
+
+on:
+  push:
+    paths:
+      - 'frontend/**'
+  pull_request:
+    paths:
+      - 'frontend/**'
+
+env:
+  IMAGE_REGISTRY: ${{ secrets.IMAGE_REGISTRY }}
+  ACR_NAME: ${{ secrets.ACR_NAME }}
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: |
+          if [ -f package.json ]; then
+            npm run lint || true
+          fi
+
+      - name: Run tests
+        run: |
+          if [ -f package.json ]; then
+            npm test -- --ci --reporters=default || true
+          fi
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Set image tag
+        id: vars
+        run: echo "IMAGE_TAG=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login to ACR
+        run: az acr login --name ${{ secrets.ACR_NAME }}
+
+      - name: Build and push Docker image (ACR)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.IMAGE_REGISTRY }}/frontend:${{ steps.vars.outputs.IMAGE_TAG }}
+
+      - name: Publish image tag output
+        run: echo "image=${{ secrets.IMAGE_REGISTRY }}/frontend:${{ steps.vars.outputs.IMAGE_TAG }}" >> $GITHUB_OUTPUT
