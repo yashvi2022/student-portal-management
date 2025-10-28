@@ -1,0 +1,14 @@
+auth:
+  enabled: true
+  rootPassword: "password123"
+  username: "admin"
+  password: "password123"
+  database: "student_portal"
+
+persistence:
+  enabled: true
+  size: 10Gi
+
+service:
+  type: ClusterIP
+  port: 27017
