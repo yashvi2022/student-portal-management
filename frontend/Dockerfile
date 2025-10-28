@@ -3,7 +3,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copy package files
-#
+
 COPY package*.json ./
 
 # Install dependencies (use npm install instead of npm ci)
