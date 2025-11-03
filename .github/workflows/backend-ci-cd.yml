@@ -89,7 +89,7 @@ jobs:
           docker push $IMAGE_NAME:latest
 
       - name: Trivy image scan (fail on HIGH/CRITICAL)
-        uses: aquasecurity/trivy-action@v1
+        uses: aquasecurity/trivy-action@0.20.0
         with:
           image-ref: ${{ secrets.ACR_NAME }}.azurecr.io/student-portal-backend:${{ github.sha }}
           format: 'table'
