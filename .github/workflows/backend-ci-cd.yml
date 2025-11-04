@@ -81,10 +81,9 @@ jobs:
       - name: Build and push Docker image
         run: |
           cd backend
-          docker build -t $IMAGE_NAME:${TAG} -f Dockerfile .
-          docker push $IMAGE_NAME:${TAG}
-          docker tag $IMAGE_NAME:${TAG} $IMAGE_NAME:latest
-          docker push $IMAGE_NAME:latest
+          docker build -t myregistry.azurecr.io/myapp:${{ github.sha }} .
+          docker push myregistry.azurecr.io/myapp:${{ github.sha }}
+         
 
       - name: Trivy image scan (fail on HIGH/CRITICAL)
         uses: aquasecurity/trivy-action@0.20.0
