@@ -78,6 +78,7 @@ jobs:
        
       - name: Build and push Docker image
         run: |
+          cd backend
           IMAGE=studentportalregistry.azurecr.io/student-portal-backend:${{ github.sha }}
           docker build -t $IMAGE .
           docker push $IMAGE
