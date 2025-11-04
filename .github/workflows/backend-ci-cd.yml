@@ -119,5 +119,5 @@ jobs:
           kubectl apply -f k8s/backend/backend-deployment.yaml
          
           # wait for rollout
-          kubectl rollout status deployment/student-portal-backend --namespace default --timeout=180s
+          kubectl rollout status deployment/backend-deployment --namespace student-portal --timeout=180s
 
