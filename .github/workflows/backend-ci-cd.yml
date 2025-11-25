@@ -117,6 +117,7 @@ jobs:
       - name: Apply Kubernetes manifests (backend)
         run: |
           kubectl apply -f k8s/backend/backend-deployment.yaml
+          kubectl apply -f k8s/backend/backend-svc.yaml
          
           # wait for rollout
           kubectl rollout status deployment/backend-deployment --namespace student-portal --timeout=180s
