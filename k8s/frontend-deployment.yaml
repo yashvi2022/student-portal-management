@@ -26,17 +26,4 @@ spec:
             memory: "256Mi"
             cpu: "250m"
         imagePullPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-service
-  namespace: student-portal
-spec:
-  selector:
-    app: frontend
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-  type: LoadBalancer
+
