@@ -31,17 +31,4 @@ spec:
             memory: "512Mi"
             cpu: "500m"
         imagePullPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-service
-  namespace: student-portal
-spec:
-  selector:
-    app: backend
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 5000
-  type: LoadBalancer
+
