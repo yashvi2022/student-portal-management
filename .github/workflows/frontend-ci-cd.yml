@@ -101,6 +101,6 @@ jobs:
       - name: Apply Kubernetes manifests (frontend)
         run: |
           kubectl apply -f k8s/frontend-deployment.yaml
-          kubectl apply -f k8s/frontend-service.yaml
+          kubectl apply -f k8s/frontend-svc.yaml
           kubectl rollout status deployment/student-portal-frontend --namespace default --timeout=180s
 
